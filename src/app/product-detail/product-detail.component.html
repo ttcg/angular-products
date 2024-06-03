@@ -1,0 +1,80 @@
+<h2 *ngIf="isCreateMode">Create Product</h2>
+<h2 *ngIf="!isCreateMode">Product - {{productForm.controls.name.value}}</h2>
+<ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs m-3">
+    <li [ngbNavItem]="1">
+        <button ngbNavLink>Product</button>
+        <ng-template ngbNavContent>
+            <form class="row" [formGroup]="productForm" (ngSubmit)="onSubmitProductForm()">
+                <div class="row mb-3">
+                    <label for="name" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="name" autocomplete="off" formControlName="name">
+                        <div class="text-danger"
+                            *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched)">
+                            <small>
+                                <div *ngIf="productForm.controls.name.errors?.['required']">
+                                    Name is required.
+                                </div>
+                                <div *ngIf="productForm.controls.name.errors?.['minlength']">
+                                    Name must be at least 5 characters long.
+                                </div>
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="brandId" class="col-sm-2 col-form-label">Brand</label>
+                    <div class="col-sm-3">
+                        <select id="brandId" class="form-select" formControlName="brandId">
+                            <option value=""></option>
+                            <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.brandName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="gtin" class="col-sm-2 col-form-label">GTIN</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="enter a value" id="gtin"
+                            formControlName="gtin">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="netContents" class="col-sm-2 col-form-label">Unit of Measure</label>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="enter a value" id="netContentValue"
+                                #netContentValue>
+                            <select class="form-select" aria-label="select units" #netContentType>
+                                <option *ngFor="let item of netContents" value="{{item.code}}">{{item.text}}</option>
+                            </select>
+                            <a (click)="addNetContent(netContentValue.value,netContentType.value,netContentValue)"
+                                class="btn btn-secondary active" role="button" aria-pressed="true">Add</a>
+
+                        </div>
+                        <div *ngIf="selectedNetContents">
+                            <span *ngFor="let item of selectedNetContents"
+                                class="badge rounded-pill bg-secondary me-2">{{item.value}} ({{item.text}})<a
+                                    role="button" (click)="removeNetContent(item.code)" class="text-white closeBtn"
+                                    title="Remove">X</a> </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm-3 offset-sm-2">
+                        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Save</button>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="2" *ngIf="!isCreateMode">
+        <button ngbNavLink>Variants</button>
+        <ng-template ngbNavContent>
+            <app-product-variants [productId]="productId!"></app-product-variants>
+        </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="m-3"></div>

@@ -1,0 +1,21 @@
+<nav *ngIf="pages != 0">
+    <ul class="pagination justify-content-end">
+        <li class="page-item" *ngIf="first" [ngClass]="{'disabled': !prev}">
+            <a class="page-link" tabindex="-1" (click)="onChangePage(first)" role="button">First</a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': !prev}">
+            <a class="page-link" tabindex="-1" (click)="onChangePage(1)" role="button">Previous</a>
+        </li>        
+
+        <li class="page-item">
+            <a class="page-link active">{{current}}</a>
+        </li>
+        
+        <li class="page-item" [ngClass]="{'disabled': !next}">
+            <a class="page-link" (click)="onChangePage(next ?? 1)" role="button">Next</a>
+        </li>
+        <li class="page-item" *ngIf="last" [ngClass]="{'disabled': !next}">
+            <a class="page-link" tabindex="-1" (click)="onChangePage(last)" role="button">Last</a>
+        </li>
+    </ul>
+</nav>

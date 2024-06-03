@@ -1,0 +1,82 @@
+<form class="row">
+    <div ngbAccordion [formGroup]="variantForm">
+        <ng-container formArrayName="variants">
+            <div *ngFor="let productVariant of variantForms.controls; let i=index" [formGroupName]="i" ngbAccordionItem
+                [collapsed]="hasProductVariant()">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>
+                        <ng-container>{{getProductVariantName(productVariant)}}</ng-container>
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+
+                            <div class="row mb-3">
+                                <label for="supplierCompanyId" class="col-sm-2 col-form-label">Supplier <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-3">
+                                    <select id="supplierCompanyId" class="form-select"
+                                        formControlName="supplierCompanyId">
+                                        <option value=""></option>
+                                        <option *ngFor="let company of companies" value="{{company.id}}">
+                                            {{company.name}}</option>
+                                    </select>
+                                    <div class="text-danger"
+                                        *ngIf="productVariant.controls.supplierCompanyId.invalid && (productVariant.controls.supplierCompanyId.dirty || productVariant.controls.supplierCompanyId.touched)">
+                                        <small>
+                                            <div *ngIf="productVariant.controls.supplierCompanyId.errors?.['required']">
+                                                Required.
+                                            </div>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="name" autocomplete="off"
+                                        formControlName="name">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="country" class="col-sm-2 col-form-label">Countries </label>
+                                <div class="col-sm-3">
+                                    <div class="input-group mb-3">
+                                        <select id="country" class="form-select" #country>
+                                            <option value=""></option>
+                                            <option *ngFor="let item of countries" value="{{item.code}}">
+                                                {{item.text}}
+                                            </option>
+                                        </select>
+                                        <a (click)="addCountry(productVariant.controls.keyId.value, country.value)"
+                                            class="btn btn-secondary active" role="button" aria-pressed="true">Add</a>
+                                    </div>
+                                    <div *ngIf="selectedCountries">
+                                        <span
+                                            *ngFor="let item of getSelectedCountries(productVariant.controls.keyId.value)"
+                                            class="badge rounded-pill bg-secondary me-2">{{item.text}} <a role="button"
+                                                (click)="removeCountry(productVariant.controls.keyId.value, item.code)"
+                                                class="text-white closeBtn" title="Remove">X</a> </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3 offset-sm-2">
+                                    <button type="button" class="btn btn-primary" (click)="onSubmitForm(i)"
+                                        [disabled]="!productVariant.valid">Save</button>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</form>
+<div>
+    <button type="button" class="btn btn-primary mt-3" (click)="addNewVariantForm()"
+        [disabled]="!canAddNewVariantForm">Add New Variant</button>
+</div>

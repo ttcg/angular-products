@@ -1,1 +1,60 @@
-<p>products works!</p>
+<div class="mx-5">
+    <div>
+      <input type="text" placeholder="Enter name or GTIN" [(ngModel)]="filters.searchTerm" class="m-1" size="50" />
+      <div class="dropdown">
+        <button (click)="toggleBrandDropdown()" class="btn btn-info mx-1">
+          Brands<span *ngIf="brand"> ({{brand.brandName}})
+          </span>
+        </button>
+        <div id="myDropdown" class="dropdown-content" [class.show]="showBrands == true">          
+          <a *ngFor="let brand of brands" (click)="selectBrand(brand)" role="button">{{brand.brandName}}</a>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary m-1" (click)="filterProducts(1)">Search Products</button>
+      <button type="button" class="btn btn-secondary m-1" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  
+    <div *ngIf="pagination" class="mt-3">
+      Displaying <b>{{products.length}}</b> of <b>{{pagination.items}}</b> products. Total Pages:
+      {{totalPages}}
+      <a routerLink="/products/create" class="btn btn-success float-end m-1">Create a new Product</a>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" class="col-4">Product Name</th>
+          <th scope="col" class="col-3">Brand</th>
+          <th scope="col" class="col-2">Gtin</th>
+          <th scope="col" class="col-2">Status</th>
+          <th scope="col" class="col-1">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <a routerLink="/products/{{product.id}}" class="link-underline-light">{{product.productName}}</a>
+          </td>
+          <td>{{getBrandById(product.brandId)}}</td>
+          <td>{{product.gtin}}</td>
+          <td>{{getProductStatus(product.isActive)}}</td>
+          <td><button type="button" *ngIf="getProductStatus(product.isActive) == 'Active'" class="btn btn-danger"
+              (click)="deleteProduct(product.id)">Delete</button></td>
+        </tr>
+        <tr *ngIf="products.length == 0">
+          <td colspan="5">
+            There are no items to display.
+          </td>
+        </tr>
+      </tbody>
+    </table>  
+    <app-paginator 
+      [current]="currentPage" 
+      [pages]="totalPages" 
+      [first]="pagination?.first"
+      [prev]="pagination?.prev"
+      [next]="pagination?.next" 
+      [last]="pagination?.last"
+      (goTo)="changePage($event)">
+    </app-paginator>  
+  </div>

@@ -1,0 +1,194 @@
+{
+  "products": [
+    {
+      "productName": "Bananas",
+      "brandId": 11,
+      "gtin": 111222,
+      "netContents": [
+        {
+          "value": 123,
+          "unitId": "g"
+        },
+        {
+          "value": 30,
+          "unitId": "pg"
+        }
+      ],
+      "id": "1001"
+    },
+    {
+      "productName": "Orange",
+      "brandId": 12,
+      "gtin": 222333,
+      "netContents": [
+        {
+          "value": 200,
+          "unitId": "g"
+        },
+        {
+          "value": "12",
+          "unitId": "kg"
+        }
+      ],
+      "id": "1002"
+    },
+    {
+      "id": "1003",
+      "productName": "Grape",
+      "brandId": 12,
+      "companyId": 501,
+      "gtin": 333444,
+      "netContents": [
+        {
+          "unitId": "kg",
+          "value": 50
+        }
+      ],
+      "isActive": true
+    }
+  ],
+  "brands": [
+    {
+      "id": "11",
+      "brandName": "Kolton",
+      "companyId": 501
+    },
+    {
+      "id": "12",
+      "brandName": "Seward",
+      "companyId": 501
+    },
+    {
+      "id": "13",
+      "brandName": "Charlie",
+      "companyId": 501
+    },
+    {
+      "id": "14",
+      "brandName": "Callan",
+      "companyId": 501
+    },
+    {
+      "id": "15",
+      "brandName": "Linton",
+      "companyId": 501
+    },
+    {
+      "id": "16",
+      "brandName": "Johnson",
+      "companyId": 502
+    }
+  ],
+  "product-variants": [
+    {
+      "productId": "1001",
+      "supplierCompanyId": "602",
+      "productVariantName": "aung net variant item",
+      "countriesOfOrigin": [
+        "GB",
+        "FR",
+        "IN"
+      ],
+      "id": "2001"
+    },
+    {
+      "productId": "1001",
+      "supplierCompanyId": "601",
+      "productVariantName": "sw company",
+      "countriesOfOrigin": [
+        "IT"
+      ],
+      "id": "2002"
+    },
+    {
+      "id": "2003",
+      "productId": "1001",
+      "supplierCompanyId": "603",
+      "productVariantName": "last Variant name",
+      "countriesOfOrigin": [
+        "CN"
+      ]
+    }
+  ],
+  "companies": [
+    {
+      "id": "501",
+      "name": "Great Western Retailer",
+      "type": "Retailer"
+    },
+    {
+      "id": "502",
+      "name": "Southern Retailer",
+      "type": "Retailer"
+    },
+    {
+      "id": "601",
+      "name": "Shwewah",
+      "type": "Supplier"
+    },
+    {
+      "id": "602",
+      "name": "Aung Net",
+      "type": "Supplier"
+    },
+    {
+      "id": "603",
+      "name": "Kyawswar",
+      "type": "Supplier"
+    }
+  ],
+  "countries": [
+    {
+      "code": "GB",
+      "text": "Great Britain",
+      "id": "5d80"
+    },
+    {
+      "code": "IT",
+      "text": "Italy",
+      "id": "81ce"
+    },
+    {
+      "code": "FR",
+      "text": "France",
+      "id": "6618"
+    },
+    {
+      "code": "CN",
+      "text": "China",
+      "id": "8f2d"
+    },
+    {
+      "code": "IN",
+      "text": "India",
+      "id": "317c"
+    }
+  ],
+  "unit-of-measures": [
+    {
+      "code": "kg",
+      "text": "kilogram",
+      "id": "189a"
+    },
+    {
+      "code": "g",
+      "text": "gram",
+      "id": "1519"
+    },
+    {
+      "code": "mg",
+      "text": "milligram",
+      "id": "e940"
+    },
+    {
+      "code": "ng",
+      "text": "nanogram",
+      "id": "f740"
+    },
+    {
+      "code": "pg",
+      "text": "picogram",
+      "id": "0d95"
+    }
+  ]
+}

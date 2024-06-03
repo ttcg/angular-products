@@ -4,11 +4,12 @@ import { OAuthConfig } from './oauth/oauthConfig';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { filter } from 'rxjs';
 import { HeaderComponent } from './header/header.component';
+import { ToastsComponent } from './toasts/toasts.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, ToastsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
