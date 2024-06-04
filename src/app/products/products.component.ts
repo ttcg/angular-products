@@ -41,10 +41,6 @@ export class ProductsComponent {
     this.loadBrands();
   }
 
-  ngAfterViewInit() {
-    this.brandSearch();
-  }
-
   getProductStatus = (status: string) => status == 'true' ? 'Archived' : 'Active';
 
   loadBrands() {
@@ -66,24 +62,7 @@ export class ProductsComponent {
     return this.productsService.filterBrands(params);
   }
 
-  brandSearch() {
-
-    // Adding keyup Event Listerner on input field
-    const search$ = fromEvent(this.brandInput.nativeElement, 'keyup').pipe(
-      map((event: any) => event.target.value),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap((term) => this.filterBrands(term))
-    );
-
-    search$.subscribe(data => {
-      this.brands = data;
-    })
-  }
-
   getBrandById(brandId: string) {
-    console.log(brandId)
-    console.log(this.brands)
     var brand = this.brands.find(x => x.id == brandId);
     return brand?.brandName ?? "";
   }

@@ -5,11 +5,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { filter } from 'rxjs';
 import { HeaderComponent } from './header/header.component';
 import { ToastsComponent } from './toasts/toasts.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, ToastsComponent],
+  imports: [RouterOutlet, HeaderComponent, ToastsComponent, SpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

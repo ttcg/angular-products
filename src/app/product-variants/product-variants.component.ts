@@ -61,7 +61,6 @@ export class ProductVariantsComponent {
 
   addNewVariantForm() {
     this.variantForms.push(this.getNewVariantForm());
-    console.log(this.variantForms)
   }
 
   companies: Company[] = [];
